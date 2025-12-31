@@ -11,7 +11,6 @@ const App: React.FC = () => {
   const [matchFieldId, setMatchFieldId] = useState<string>("");
   const [uploadFieldId, setUploadFieldId] = useState<string>("");
   const [maxImages, setMaxImages] = useState<number>(10);
-  const [priorityKeyword, setPriorityKeyword] = useState<string>("封面");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [logs, setLogs] = useState<string[]>([]);
   const [busy, setBusy] = useState<boolean>(false);
@@ -168,7 +167,7 @@ const App: React.FC = () => {
           continue;
         }
 
-        const ordered = orderFiles(files, priorityKeyword);
+        const ordered = orderFiles(files);
         const uploadList = ordered.slice(0, limit);
 
         if (!uploadList.length) {
@@ -215,26 +214,26 @@ const App: React.FC = () => {
 
   const folderPreview = useMemo(() => {
     return Object.entries(groupedFiles).map(([folder, files]) => {
-      const ordered = orderFiles(files, priorityKeyword);
+      const ordered = orderFiles(files);
       return {
         folder,
         total: files.length,
         preview: ordered.slice(0, 3).map((file) => file.name),
       };
     });
-  }, [groupedFiles, priorityKeyword]);
+  }, [groupedFiles]);
 
   return (
     <div className="app">
       <header className="hero">
         <div>
           <p className="eyebrow">Feishu Bitable Sidebar</p>
-          <h1>批量图片上传</h1>
+          <h1>图片批量上传</h1>
           <p className="sub">
             选择父目录 → 按子文件夹名匹配记录 → 将图片写入附件字段
           </p>
         </div>
-        <div className="badge">{priorityKeyword || "封面"}优先 · 数字排序 · 最多 {maxImages} 张</div>
+        <div className="badge">封面优先 · 数字排序 · 最多 {maxImages} 张</div>
       </header>
 
       {initError && <div className="alert error">初始化失败：{initError}</div>}
@@ -275,7 +274,7 @@ const App: React.FC = () => {
                 </option>
               ))}
             </select>
-            <p className="hint">将按照关键词优先、数字顺序写入</p>
+            <p className="hint">将按照封面优先、数字顺序写入</p>
           </div>
 
           <div className="field">
@@ -288,17 +287,6 @@ const App: React.FC = () => {
               onChange={(e) => setMaxImages(Number(e.target.value) || 1)}
             />
             <p className="hint">超出数量会被自动截断</p>
-          </div>
-
-          <div className="field">
-            <label>优先关键词</label>
-            <input
-              type="text"
-              value={priorityKeyword}
-              placeholder="封面"
-              onChange={(e) => setPriorityKeyword(e.target.value)}
-            />
-            <p className="hint">文件名包含此关键词的图片优先排序</p>
           </div>
         </div>
       </section>
@@ -336,7 +324,7 @@ const App: React.FC = () => {
           <div>子文件夹：{folderPreview.length}</div>
           <div>图片总数：{totalImages}</div>
           <div>单行上限：{maxImages}</div>
-          <div>规则：{priorityKeyword || "封面"}优先 &gt; 数字升序 &gt; 其他</div>
+          <div>规则：封面优先 &gt; 数字升序 &gt; 其他</div>
         </div>
 
         {folderPreview.length > 0 && (
@@ -478,19 +466,17 @@ function jsonify(input: string): string {
   return JSON.stringify(input);
 }
 
-function orderFiles(files: File[], priorityKeyword: string = "封面"): File[] {
-  const priority: File[] = [];
+function orderFiles(files: File[]): File[] {
+  const cover: File[] = [];
   const numbered: { value: number; file: File }[] = [];
   const others: File[] = [];
-
-  const keyword = priorityKeyword.trim() || "封面";
 
   files.forEach((file) => {
     const name = file.name;
     const base = name.replace(/\.[^.]+$/, "");
 
-    if (name.includes(keyword)) {
-      priority.push(file);
+    if (name.includes("商品主图")) {
+      cover.push(file);
       return;
     }
 
@@ -506,12 +492,12 @@ function orderFiles(files: File[], priorityKeyword: string = "封面"): File[] {
     others.push(file);
   });
 
-  priority.sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+  cover.sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
   numbered.sort((a, b) => a.value - b.value || a.file.name.localeCompare(b.file.name, "zh-CN"));
   others.sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
 
   return [
-    ...priority,
+    ...cover,
     ...numbered.map((item) => item.file),
     ...others,
   ];
