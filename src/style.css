@@ -129,6 +129,34 @@ body {
   border: 1.5px dashed #b7c7dd;
   border-radius: 14px;
   background: #f6fbff;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropzone.dragging {
+  border-color: #0ea5e9;
+  border-width: 2px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1),
+              0 10px 30px rgba(14, 165, 233, 0.2);
+  transform: scale(1.02);
+}
+
+.dropzone.dragging .drop-content {
+  color: #0369a1;
+}
+
+.dropzone.dragging .eyebrow {
+  color: #0ea5e9;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .drop-content {

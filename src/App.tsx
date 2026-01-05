@@ -3,6 +3,35 @@ import { bitable, FieldType, IFieldMeta } from "@lark-base-open/js-sdk";
 
 type GroupedFiles = Record<string, File[]>;
 
+// FileSystem API 类型声明
+interface FileSystemEntry {
+  isFile: boolean;
+  isDirectory: boolean;
+  name: string;
+}
+
+interface FileSystemFileEntry extends FileSystemEntry {
+  file(successCallback: (file: File) => void, errorCallback?: (error: Error) => void): void;
+}
+
+interface FileSystemDirectoryEntry extends FileSystemEntry {
+  createReader(): FileSystemDirectoryReader;
+}
+
+interface FileSystemDirectoryReader {
+  readEntries(
+    successCallback: (entries: FileSystemEntry[]) => void,
+    errorCallback?: (error: Error) => void,
+  ): void;
+}
+
+// 扩展 DataTransferItem 以支持 webkitGetAsEntry
+declare global {
+  interface DataTransferItem {
+    webkitGetAsEntry(): FileSystemEntry | null;
+  }
+}
+
 const SUPPORTED_IMAGE_EXTS = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
 
 const App: React.FC = () => {
@@ -11,10 +40,12 @@ const App: React.FC = () => {
   const [matchFieldId, setMatchFieldId] = useState<string>("");
   const [uploadFieldId, setUploadFieldId] = useState<string>("");
   const [maxImages, setMaxImages] = useState<number>(10);
+  const [priorityKeyword, setPriorityKeyword] = useState<string>("封面");
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [logs, setLogs] = useState<string[]>([]);
   const [busy, setBusy] = useState<boolean>(false);
   const [initError, setInitError] = useState<string>("");
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   useEffect(() => {
     const init = async () => {
@@ -84,15 +115,51 @@ const App: React.FC = () => {
     );
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const files = Array.from(event.dataTransfer.files || []);
-    const imageFiles = files.filter(isSupportedImage);
-    setSelectedFiles(imageFiles);
-    const skipped = files.length - imageFiles.length;
-    appendLog(
-      `📂 拖入 ${imageFiles.length} 个图片文件${skipped > 0 ? `，忽略 ${skipped} 个非图片文件` : ""}`,
-    );
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    // 只有当离开整个 dropzone 时才设置为 false
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX;
+    const y = event.clientY;
+
+    if (x <= rect.left || x >= rect.right || y <= rect.top || y >= rect.bottom) {
+      setIsDragging(false);
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsDragging(false);
+    appendLog("📂 正在读取拖入的文件夹...");
+
+    try {
+      const items = event.dataTransfer.items;
+      if (!items || items.length === 0) {
+        appendLog("⚠️ 未检测到拖入的文件");
+        return;
+      }
+
+      const files = await getAllFilesFromItems(items);
+      const imageFiles = files.filter(isSupportedImage);
+      setSelectedFiles(imageFiles);
+
+      const skipped = files.length - imageFiles.length;
+      appendLog(
+        `📂 拖入 ${imageFiles.length} 个图片文件${skipped > 0 ? `，忽略 ${skipped} 个非图片文件` : ""}`,
+      );
+    } catch (err) {
+      const message = (err as Error)?.message || "未知错误";
+      appendLog(`❌ 读取文件夹失败：${message}`);
+    }
   };
 
   const runUpload = async () => {
@@ -167,7 +234,7 @@ const App: React.FC = () => {
           continue;
         }
 
-        const ordered = orderFiles(files);
+        const ordered = orderFiles(files, priorityKeyword);
         const uploadList = ordered.slice(0, limit);
 
         if (!uploadList.length) {
@@ -214,26 +281,26 @@ const App: React.FC = () => {
 
   const folderPreview = useMemo(() => {
     return Object.entries(groupedFiles).map(([folder, files]) => {
-      const ordered = orderFiles(files);
+      const ordered = orderFiles(files, priorityKeyword);
       return {
         folder,
         total: files.length,
         preview: ordered.slice(0, 3).map((file) => file.name),
       };
     });
-  }, [groupedFiles]);
+  }, [groupedFiles, priorityKeyword]);
 
   return (
     <div className="app">
       <header className="hero">
         <div>
-          <p className="eyebrow">Feishu Bitable Sidebar</p>
+          <p className="eyebrow">Folder Image Sync</p>
           <h1>图片批量上传</h1>
           <p className="sub">
             选择父目录 → 按子文件夹名匹配记录 → 将图片写入附件字段
           </p>
         </div>
-        <div className="badge">封面优先 · 数字排序 · 最多 {maxImages} 张</div>
+        <div className="badge">智能匹配 · 关键词优先 · 数字升序 </div>
       </header>
 
       {initError && <div className="alert error">初始化失败：{initError}</div>}
@@ -288,6 +355,17 @@ const App: React.FC = () => {
             />
             <p className="hint">超出数量会被自动截断</p>
           </div>
+
+          <div className="field">
+            <label>优先关键词（封面）</label>
+            <input
+              type="text"
+              value={priorityKeyword}
+              onChange={(e) => setPriorityKeyword(e.target.value)}
+              placeholder="封面"
+            />
+            <p className="hint">文件名包含此关键词将优先上传</p>
+          </div>
         </div>
       </section>
 
@@ -298,8 +376,10 @@ const App: React.FC = () => {
         </div>
 
         <div
-          className="dropzone"
-          onDragOver={(e) => e.preventDefault()}
+          className={`dropzone ${isDragging ? "dragging" : ""}`}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
           <div className="drop-content">
@@ -466,7 +546,7 @@ function jsonify(input: string): string {
   return JSON.stringify(input);
 }
 
-function orderFiles(files: File[]): File[] {
+function orderFiles(files: File[], priorityKeyword: string = "封面"): File[] {
   const cover: File[] = [];
   const numbered: { value: number; file: File }[] = [];
   const others: File[] = [];
@@ -475,7 +555,7 @@ function orderFiles(files: File[]): File[] {
     const name = file.name;
     const base = name.replace(/\.[^.]+$/, "");
 
-    if (name.includes("商品主图")) {
+    if (priorityKeyword && name.includes(priorityKeyword)) {
       cover.push(file);
       return;
     }
@@ -510,4 +590,56 @@ function formatFieldType(type: FieldType): string {
     [FieldType.Attachment]: "附件/图片",
   };
   return mapping[type] || `类型 ${type}`;
+}
+
+async function getAllFilesFromItems(items: DataTransferItemList): Promise<File[]> {
+  const files: File[] = [];
+  const entries: FileSystemEntry[] = [];
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const entry = item.webkitGetAsEntry();
+    if (entry) {
+      entries.push(entry);
+    }
+  }
+
+  for (const entry of entries) {
+    await traverseFileTree(entry, "", files);
+  }
+
+  return files;
+}
+
+async function traverseFileTree(
+  entry: FileSystemEntry,
+  path: string,
+  files: File[],
+): Promise<void> {
+  if (entry.isFile) {
+    const fileEntry = entry as FileSystemFileEntry;
+    const file = await new Promise<File>((resolve, reject) => {
+      fileEntry.file(resolve, reject);
+    });
+
+    // 手动设置 webkitRelativePath
+    const fullPath = path ? `${path}/${file.name}` : file.name;
+    Object.defineProperty(file, "webkitRelativePath", {
+      value: fullPath,
+      writable: false,
+    });
+
+    files.push(file);
+  } else if (entry.isDirectory) {
+    const dirEntry = entry as FileSystemDirectoryEntry;
+    const reader = dirEntry.createReader();
+    const entries = await new Promise<FileSystemEntry[]>((resolve, reject) => {
+      reader.readEntries(resolve, reject);
+    });
+
+    const newPath = path ? `${path}/${entry.name}` : entry.name;
+    for (const childEntry of entries) {
+      await traverseFileTree(childEntry, newPath, files);
+    }
+  }
 }
