@@ -93,7 +93,7 @@ VITE_BATCH_IMAGE_UPLOAD_GUIDE_URL=填入使用指南链接
 - 计费说明：界面展示「有可上传记录才消耗10积分」。
 - 帮助入口：Hero 中 `使用指南` 链接指向公开飞书文档。
 - 支持入口：Hero 中 `联系我们` 链接指向公开反馈群。
-- 如果有问题，可以[联系我们并加入官方群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690)，我们会及时优化。
+- 如果有问题，可以联系我们，我们会及时优化。[加入官方群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690)
 - 隐私说明：图片不经过 Firefly 服务器，只在当前浏览器和飞书多维表格之间写入。
 - GitHub 仓库：包含最新 `dist/` 和带 `"output": "dist"` 的 `package.json`；不要提交 `.env.local`、`node_modules/`、`tmp/`、`prototypes/`。
 - 国际化：`src/locales/` 包含中文、英文和日文文案。

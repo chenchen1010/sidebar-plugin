@@ -61,4 +61,4 @@
 - 官方群：https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690
 - 建议用户反馈时提供：表结构截图、文件夹命名示例、运行日志截图
 
-如果有问题，可以[联系我们并加入官方群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690)，我们会及时优化。
+如果有问题，可以联系我们，我们会及时优化。[加入官方群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690)
