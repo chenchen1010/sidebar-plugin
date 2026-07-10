@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "Batch Image Upload",
+    "title": "Batch Image Upload (Folder + Field Matching)",
     "guide": "Guide",
     "matchTag": "Folder matching",
     "billingTag": "{{price}} credits only when uploadable",
@@ -55,7 +55,7 @@
   },
   "logsPanel": {
     "title": "Progress and feedback",
-    "subtitle": "Upload progress. Use Contact above if an error occurs",
+    "subtitle": "Upload progress. Contact us if you need help; we’ll keep improving.",
     "empty": "No logs yet"
   },
   "fieldType": {

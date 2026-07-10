@@ -97,6 +97,7 @@ body {
   font-size: 30px;
   font-weight: 700;
   line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .banner-guide {
@@ -571,7 +572,8 @@ body {
   }
 
   .banner-title {
-    font-size: 26px;
+    font-size: 22px;
+    line-height: 1.28;
   }
 
   .banner-footer {

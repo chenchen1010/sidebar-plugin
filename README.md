@@ -1,4 +1,4 @@
-# 多维表格边栏插件：批量图片上传
+# 多维表格边栏插件：图片批量上传（支持文件夹+字段匹配）
 
 把一批图片按文件夹名写入对应的多维表格记录，适合商品图、素材包、项目图片归档等高频批量上传场景。用户选择父目录后，插件会按子文件夹名称匹配表格行，并将图片写入附件/图片字段。
 
@@ -51,7 +51,7 @@ https://firefly.qwjxqn.xyz/api/products/batch-image-upload/deduct
 ```bash
 VITE_FIREFLY_BILLING_ENDPOINT=https://firefly.qwjxqn.xyz/api/products/batch-image-upload/deduct
 VITE_FIREFLY_HOME_URL=https://firefly.qwjxqn.xyz
-VITE_FIREFLY_FEEDBACK_GROUP_URL=填入公开反馈群链接
+VITE_FIREFLY_FEEDBACK_GROUP_URL=https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690
 VITE_BATCH_IMAGE_UPLOAD_GUIDE_URL=填入使用指南链接
 ```
 
@@ -63,6 +63,9 @@ VITE_BATCH_IMAGE_UPLOAD_GUIDE_URL=填入使用指南链接
 
 - 插件 logo：`public/firefly-batch-image-logo.png`（512 × 512）
 - 产品设计图：`public/firefly-batch-image-product.png`（1920 × 960）
+- 英文产品设计图：`public/firefly-batch-image-product-en.png`（1920 × 960）
+- 中文运营图：`public/batch_image_upload_cn.png`（580 × 320）
+- 英文运营图：`public/batch_image_upload_en.png`（580 × 320）
 - Hero 背景图：`public/firefly-batch-hero-bg.png`（1672 × 941）
 
 ## 使用步骤
@@ -90,6 +93,7 @@ VITE_BATCH_IMAGE_UPLOAD_GUIDE_URL=填入使用指南链接
 - 计费说明：界面展示「有可上传记录才消耗10积分」。
 - 帮助入口：Hero 中 `使用指南` 链接指向公开飞书文档。
 - 支持入口：Hero 中 `联系我们` 链接指向公开反馈群。
+- 如果有问题，可以[联系我们并加入官方群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690)，我们会及时优化。
 - 隐私说明：图片不经过 Firefly 服务器，只在当前浏览器和飞书多维表格之间写入。
 - GitHub 仓库：包含最新 `dist/` 和带 `"output": "dist"` 的 `package.json`；不要提交 `.env.local`、`node_modules/`、`tmp/`、`prototypes/`。
 - 国际化：`src/locales/` 包含中文、英文和日文文案。

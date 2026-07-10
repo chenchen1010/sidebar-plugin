@@ -73,7 +73,7 @@ const FIREFLY_HOME_URL =
   "https://firefly.qwjxqn.xyz";
 const FIREFLY_FEEDBACK_GROUP_URL =
   viteEnv.VITE_FIREFLY_FEEDBACK_GROUP_URL ||
-  "https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=9d2vc5eb-0b13-46bc-8f52-c70b183e47a0";
+  "https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690";
 const GUIDE_URL =
   viteEnv.VITE_BATCH_IMAGE_UPLOAD_GUIDE_URL ||
   "https://gcn6bvkburhk.feishu.cn/docx/GBSldiL5doEsq8xAqIJca6hFnqg?from=from_copylink";

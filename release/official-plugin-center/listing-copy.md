@@ -1,8 +1,9 @@
-# 官方插件中心上架文案：批量图片上传
+# 官方插件中心上架文案：图片批量上传（支持文件夹+字段匹配）
 
 ## 基础信息
 
-- 插件名称：批量图片上传
+- 插件名称：图片批量上传（支持文件夹+字段匹配）
+- 英文名称：Batch Image Upload (Folder + Field Matching)
 - 一句话简介：按文件夹名匹配表格行，把一批图片写入对应记录。
 - 推荐分类：批量处理 / 附件处理 / 导入导出
 - 适用用户：电商运营、素材管理、项目资料归档、设计/内容团队
@@ -15,7 +16,7 @@
 
 ## 详细介绍
 
-批量图片上传适合需要把大量图片整理进多维表格的团队。你只需要按记录名称准备好子文件夹，在插件里选择匹配字段和图片字段，再选择父目录，插件会把每个子文件夹内的图片写入对应记录。
+图片批量上传（支持文件夹+字段匹配）适合需要把大量图片整理进多维表格的团队。你只需要按记录名称准备好子文件夹，在插件里选择匹配字段和图片字段，再选择父目录，插件会把每个子文件夹内的图片写入对应记录。
 
 常见场景：
 
@@ -47,11 +48,17 @@
 
 - 插件 logo：`public/firefly-batch-image-logo.png`
 - 产品设计图：`public/firefly-batch-image-product.png`
+- 英文产品设计图：`public/firefly-batch-image-product-en.png`
+- 中文运营图：`public/batch_image_upload_cn.png`（580 × 320）
+- 英文运营图：`public/batch_image_upload_en.png`（580 × 320）
 - GitHub 项目地址：`https://github.com/chenchen1010/sidebar-plugin`
 - 官方托管产物：仓库中的 `dist/`
 
 ## 用户支持
 
 - 使用指南：Hero 区域「使用指南」链接
-- 联系我们：Hero 区域「联系我们」链接，跳转公开反馈群
+- 联系我们：Hero 区域「联系我们」链接，跳转官方群
+- 官方群：https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690
 - 建议用户反馈时提供：表结构截图、文件夹命名示例、运行日志截图
+
+如果有问题，可以[联系我们并加入官方群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=953t810b-daf3-4b66-8d3c-c6f0c2184690)，我们会及时优化。
