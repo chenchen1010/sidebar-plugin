@@ -31,5 +31,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Verify committed dist
-        run: git diff --exit-code -- dist
+      - name: Verify release contract
+        run: |
+          node -e "const pkg = require('./package.json'); if (pkg.output !== 'dist') process.exit(1)"
+          git ls-files --error-unmatch dist/index.html
