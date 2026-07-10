@@ -1,0 +1,119 @@
+{
+  "app": {
+    "title": "Batch Image Upload",
+    "guide": "Guide",
+    "matchTag": "Folder matching",
+    "billingTag": "{{price}} credits only when uploadable",
+    "fireflyCta": "Get Firefly API Key",
+    "contact": "Contact"
+  },
+  "common": {
+    "unknownError": "Unknown error",
+    "none": "None"
+  },
+  "workspace": {
+    "title": "Prepare upload",
+    "subtitle": "Set your account key, choose fields and a parent folder",
+    "collapseSettings": "Collapse settings",
+    "expandSettings": "Open settings"
+  },
+  "settings": {
+    "apiKeyLabel": "Firefly API Key",
+    "apiKeyPlaceholder": "Paste your Firefly API Key",
+    "apiKeyHint": "Uses your Firefly balance and records the transaction; remember it to reuse next time",
+    "remember": "Remember the Key in this browser",
+    "done": "Save settings"
+  },
+  "fields": {
+    "matchLabel": "Match field",
+    "select": "Choose a field",
+    "matchHint": "Subfolder names must match values in this column",
+    "uploadLabel": "Image field",
+    "uploadHint": "Images are written to an attachment or image field",
+    "limitLabel": "Images per row",
+    "limitHint": "Prevents too many images from being added to one row",
+    "priorityLabel": "Primary image keyword",
+    "priorityPlaceholder": "cover",
+    "priorityHint": "Files containing this keyword are placed first"
+  },
+  "dropzone": {
+    "eyebrow": "Choose a parent folder",
+    "description": "Each subfolder under the parent folder maps to one table record",
+    "button": "Choose folder and preview"
+  },
+  "summary": {
+    "folders": "Subfolders: {{count}}",
+    "images": "Images: {{count}}",
+    "limit": "Per-row limit: {{count}}",
+    "sort": "Order: primary keyword > ascending number",
+    "folderMeta": "{{count}} images · Preview: {{preview}}"
+  },
+  "actions": {
+    "uploading": "Uploading...",
+    "start": "Start upload",
+    "clearLogs": "Clear logs"
+  },
+  "logsPanel": {
+    "title": "Progress and feedback",
+    "subtitle": "Upload progress. Use Contact above if an error occurs",
+    "empty": "No logs yet"
+  },
+  "fieldType": {
+    "text": "Text",
+    "number": "Number",
+    "attachment": "Attachment/Image",
+    "unknown": "Type {{type}}"
+  },
+  "log": {
+    "initEnvError": "Unable to access the Base environment",
+    "initFailed": "❌ Initialization failed: {{message}}",
+    "noFiles": "⚠️ No files were selected",
+    "filesSelected": "📂 Selected {{count}} image files",
+    "filesSelectedSkipped": "📂 Selected {{count}} image files and ignored {{skipped}} non-image files",
+    "readingDropped": "📂 Reading the dropped folder...",
+    "noDroppedFiles": "⚠️ No dropped files were detected",
+    "filesDropped": "📂 Added {{count}} image files",
+    "filesDroppedSkipped": "📂 Added {{count}} image files and ignored {{skipped}} non-image files",
+    "readFolderFailed": "❌ Failed to read the folder: {{message}}",
+    "noTable": "❌ Base is unavailable. Refresh or reopen the plugin",
+    "selectFields": "⚠️ Choose both a match field and an image field",
+    "selectParent": "⚠️ Choose a parent folder that contains image subfolders",
+    "enterApiKey": "⚠️ Add your Firefly API Key first",
+    "loadingRecords": "🚀 Loading records...",
+    "recordsLoaded": "✅ Loaded {{records}} records and {{keys}} usable match keys",
+    "noSubfolders": "⚠️ No subfolders were found. Make sure you selected the parent folder",
+    "subfoldersDebug": "📂 Subfolders ({{count}}): {{values}}",
+    "matchKeysDebug": "🔑 Match keys ({{count}}): {{values}}",
+    "noMatch": "⚠️ No matching record; skipped (subfolder key: {{key}}, len={{length}})",
+    "noImagesInFolder": "⚠️ No supported images in {{folder}}; skipped",
+    "noCandidates": "⚠️ No matching records can be uploaded. No Firefly credits were used",
+    "billingStart": "💳 Firefly billing: {{records}} records will be updated for {{price}} credits...",
+    "billingIdempotent": "✅ Firefly confirmed this run with no duplicate charge. Balance: {{balance}}",
+    "billingSuccess": "✅ Charged {{charged}} Firefly credits. Balance: {{balance}}",
+    "processingFolder": "📂 Processing subfolder: {{folder}}",
+    "overLimit": "⚠️ This subfolder contains {{count}} images; only the first {{limit}} will be used",
+    "uploadOrder": "🧮 Upload order ({{count}}): {{files}}",
+    "recordUpdated": "✅ Updated record {{recordId}} with {{count}} images",
+    "uploadFailed": "❌ Upload failed: {{message}}",
+    "complete": "🎉 Complete: {{success}} succeeded, {{failed}} failed, {{skipped}} skipped",
+    "runFailed": "❌ Run failed: {{message}}"
+  },
+  "billing": {
+    "networkReason": "Network error",
+    "connectionError": "Unable to reach Firefly billing ({{endpoint}}): {{reason}}. The service may be unavailable or the CORS preflight may have failed.",
+    "balancePending": "Pending",
+    "balance": "{{value}} credits",
+    "errors": {
+      "AUTHORIZATION_ERROR": "The Firefly API Key is invalid or disabled",
+      "INSUFFICIENT_CREDITS": "Not enough Firefly credits. Add credits and try again",
+      "UNKNOWN_PRODUCT": "Batch Image Upload billing is not enabled in Firefly",
+      "PRODUCT_PRICE_MISMATCH": "The Firefly credit price is misconfigured",
+      "BAD_REQUEST": "The Firefly billing request is invalid",
+      "HTTP_400": "Firefly billing returned an error. Check the deployed endpoint and CORS settings",
+      "HTTP_404": "The Firefly billing endpoint is not deployed",
+      "INTERNAL_ERROR": "Firefly billing is temporarily unavailable",
+      "NETWORK_ERROR": "Unable to reach Firefly billing",
+      "fallback": "Firefly billing failed"
+    }
+  }
+}

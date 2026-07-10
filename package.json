@@ -1,17 +1,20 @@
 {
   "name": "bitable-image-upload-sidebar",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "output": "dist",
   "scripts": {
     "dev": "vite --host --port 5173",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && vite build",
     "preview": "vite preview --host --port 4173"
   },
   "dependencies": {
     "@lark-base-open/js-sdk": "^1.0.0",
+    "i18next": "^26.3.6",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-i18next": "^17.0.9"
   },
   "devDependencies": {
     "@types/react": "^18.3.12",

@@ -1,0 +1,119 @@
+{
+  "app": {
+    "title": "批量图片上传",
+    "guide": "使用指南",
+    "matchTag": "按文件夹匹配",
+    "billingTag": "有可上传记录才消耗{{price}}积分",
+    "fireflyCta": "Firefly 官网注册获取 API Key",
+    "contact": "联系我们"
+  },
+  "common": {
+    "unknownError": "未知错误",
+    "none": "无"
+  },
+  "workspace": {
+    "title": "上传准备",
+    "subtitle": "点击右侧 ⚙️ 设置 API Key，选字段、选父目录，确认后开始上传",
+    "collapseSettings": "收起设置",
+    "expandSettings": "展开设置"
+  },
+  "settings": {
+    "apiKeyLabel": "Firefly API Key",
+    "apiKeyPlaceholder": "粘贴 Firefly API Key",
+    "apiKeyHint": "用于扣积分和记录流水；勾选后下次自动带入",
+    "remember": "在当前浏览器记住 Key",
+    "done": "完成设置"
+  },
+  "fields": {
+    "matchLabel": "匹配字段",
+    "select": "选择字段",
+    "matchHint": "子文件夹名要和这一列的值一致",
+    "uploadLabel": "图片字段",
+    "uploadHint": "写入附件/图片字段",
+    "limitLabel": "单行上限",
+    "limitHint": "避免一行塞入过多图片",
+    "priorityLabel": "主图关键词",
+    "priorityPlaceholder": "封面",
+    "priorityHint": "命中关键词的图片排在前面"
+  },
+  "dropzone": {
+    "eyebrow": "选择父目录",
+    "description": "父目录下每个子文件夹对应一条表格记录",
+    "button": "选择文件夹 预览上传效果"
+  },
+  "summary": {
+    "folders": "子文件夹：{{count}}",
+    "images": "图片总数：{{count}}",
+    "limit": "单行上限：{{count}}",
+    "sort": "排序：主图关键词 > 数字升序",
+    "folderMeta": "{{count}} 张 · 预览 {{preview}}"
+  },
+  "actions": {
+    "uploading": "正在上传...",
+    "start": "开始上传",
+    "clearLogs": "清空日志"
+  },
+  "logsPanel": {
+    "title": "运行与反馈",
+    "subtitle": "上传进度，如有报错，最上方联系我们反馈",
+    "empty": "暂无日志"
+  },
+  "fieldType": {
+    "text": "文本",
+    "number": "数字",
+    "attachment": "附件/图片",
+    "unknown": "类型 {{type}}"
+  },
+  "log": {
+    "initEnvError": "无法获取多维表格环境",
+    "initFailed": "❌ 初始化失败：{{message}}",
+    "noFiles": "⚠️ 未选择任何文件",
+    "filesSelected": "📂 已选中 {{count}} 个图片文件",
+    "filesSelectedSkipped": "📂 已选中 {{count}} 个图片文件，忽略 {{skipped}} 个非图片文件",
+    "readingDropped": "📂 正在读取拖入的文件夹...",
+    "noDroppedFiles": "⚠️ 未检测到拖入的文件",
+    "filesDropped": "📂 拖入 {{count}} 个图片文件",
+    "filesDroppedSkipped": "📂 拖入 {{count}} 个图片文件，忽略 {{skipped}} 个非图片文件",
+    "readFolderFailed": "❌ 读取文件夹失败：{{message}}",
+    "noTable": "❌ 未获取到多维表格实例，刷新插件或重新打开试试",
+    "selectFields": "⚠️ 请选择匹配字段和上传字段",
+    "selectParent": "⚠️ 请先选择包含子文件夹的图片目录",
+    "enterApiKey": "⚠️ 请先填写 Firefly API Key",
+    "loadingRecords": "🚀 获取记录列表...",
+    "recordsLoaded": "✅ 已获取 {{records}} 条记录，可用于匹配的键 {{keys}} 个",
+    "noSubfolders": "⚠️ 未检测到子文件夹，请确认选择的是父目录",
+    "subfoldersDebug": "📂 子文件夹({{count}})：{{values}}",
+    "matchKeysDebug": "🔑 匹配字段键({{count}})：{{values}}",
+    "noMatch": "⚠️ 找不到匹配的记录，跳过（子文件夹键: {{key}} len={{length}}）",
+    "noImagesInFolder": "⚠️ 子文件夹 {{folder}} 中没有符合条件的图片，跳过",
+    "noCandidates": "⚠️ 没有可上传的匹配记录，本次不扣 Firefly 积分",
+    "billingStart": "💳 Firefly 计费：本次将写入 {{records}} 条记录，扣 {{price}} 积分...",
+    "billingIdempotent": "✅ Firefly 已确认本次运行，无重复扣费，当前余额 {{balance}}",
+    "billingSuccess": "✅ Firefly 扣费成功，扣 {{charged}} 积分，当前余额 {{balance}}",
+    "processingFolder": "📂 处理子文件夹：{{folder}}",
+    "overLimit": "⚠️ 子文件夹共有 {{count}} 张，超过上限 {{limit}}，仅取前 {{limit}} 张",
+    "uploadOrder": "🧮 上传顺序（{{count}} 张）：{{files}}",
+    "recordUpdated": "✅ 已更新记录 {{recordId}}，上传 {{count}} 张图片",
+    "uploadFailed": "❌ 上传失败：{{message}}",
+    "complete": "🎉 完成：成功 {{success}} 个，失败 {{failed}} 个，跳过 {{skipped}} 个",
+    "runFailed": "❌ 运行出错：{{message}}"
+  },
+  "billing": {
+    "networkReason": "网络错误",
+    "connectionError": "无法连接 Firefly 计费服务（{{endpoint}}）：{{reason}}。通常是计费接口未部署、地址不可访问或 CORS 预检失败。",
+    "balancePending": "待确认",
+    "balance": "{{value}} 积分",
+    "errors": {
+      "AUTHORIZATION_ERROR": "Firefly API Key 无效或已停用",
+      "INSUFFICIENT_CREDITS": "Firefly 积分不足，请充值后再上传",
+      "UNKNOWN_PRODUCT": "批量图片上传尚未在 Firefly 开通计费",
+      "PRODUCT_PRICE_MISMATCH": "批量图片上传积分价格配置异常",
+      "BAD_REQUEST": "Firefly 扣费请求格式错误",
+      "HTTP_400": "Firefly 计费接口响应异常，请确认线上接口和 CORS 已更新",
+      "HTTP_404": "Firefly 计费接口还没上线，请先部署 Firefly 平台新版本并初始化产品",
+      "INTERNAL_ERROR": "Firefly 扣费服务暂时不可用",
+      "NETWORK_ERROR": "无法连接 Firefly 计费服务",
+      "fallback": "Firefly 扣费失败"
+    }
+  }
+}

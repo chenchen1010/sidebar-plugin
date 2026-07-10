@@ -1,0 +1,119 @@
+{
+  "app": {
+    "title": "画像一括アップロード",
+    "guide": "ガイド",
+    "matchTag": "フォルダ名で照合",
+    "billingTag": "アップロード時のみ{{price}}クレジット",
+    "fireflyCta": "Firefly で API Key を取得",
+    "contact": "問い合わせ"
+  },
+  "common": {
+    "unknownError": "不明なエラー",
+    "none": "なし"
+  },
+  "workspace": {
+    "title": "アップロード準備",
+    "subtitle": "キーを設定し、フィールドと親フォルダを選択します",
+    "collapseSettings": "設定を閉じる",
+    "expandSettings": "設定を開く"
+  },
+  "settings": {
+    "apiKeyLabel": "Firefly API Key",
+    "apiKeyPlaceholder": "Firefly API Key を貼り付け",
+    "apiKeyHint": "Firefly の残高で決済し、利用履歴を記録します",
+    "remember": "このブラウザーに Key を保存",
+    "done": "設定を保存"
+  },
+  "fields": {
+    "matchLabel": "照合フィールド",
+    "select": "フィールドを選択",
+    "matchHint": "サブフォルダ名をこの列の値と一致させます",
+    "uploadLabel": "画像フィールド",
+    "uploadHint": "添付ファイルまたは画像フィールドに書き込みます",
+    "limitLabel": "1行あたりの上限",
+    "limitHint": "1行に画像が多すぎるのを防ぎます",
+    "priorityLabel": "メイン画像のキーワード",
+    "priorityPlaceholder": "cover",
+    "priorityHint": "キーワードを含む画像を先頭に並べます"
+  },
+  "dropzone": {
+    "eyebrow": "親フォルダを選択",
+    "description": "親フォルダ内の各サブフォルダが1件のレコードに対応します",
+    "button": "フォルダを選択してプレビュー"
+  },
+  "summary": {
+    "folders": "サブフォルダ: {{count}}",
+    "images": "画像数: {{count}}",
+    "limit": "1行の上限: {{count}}",
+    "sort": "並び順: キーワード > 数値の昇順",
+    "folderMeta": "{{count}} 枚 · プレビュー: {{preview}}"
+  },
+  "actions": {
+    "uploading": "アップロード中...",
+    "start": "アップロード開始",
+    "clearLogs": "ログをクリア"
+  },
+  "logsPanel": {
+    "title": "進行状況とフィードバック",
+    "subtitle": "進行状況。エラー時は上部からお問い合わせください",
+    "empty": "ログはまだありません"
+  },
+  "fieldType": {
+    "text": "テキスト",
+    "number": "数値",
+    "attachment": "添付/画像",
+    "unknown": "タイプ {{type}}"
+  },
+  "log": {
+    "initEnvError": "Base 環境を取得できません",
+    "initFailed": "❌ 初期化に失敗しました: {{message}}",
+    "noFiles": "⚠️ ファイルが選択されていません",
+    "filesSelected": "📂 {{count}} 個の画像ファイルを選択しました",
+    "filesSelectedSkipped": "📂 {{count}} 個の画像を選択し、画像以外の {{skipped}} 個を除外しました",
+    "readingDropped": "📂 ドロップされたフォルダを読み込んでいます...",
+    "noDroppedFiles": "⚠️ ドロップされたファイルが見つかりません",
+    "filesDropped": "📂 {{count}} 個の画像ファイルを追加しました",
+    "filesDroppedSkipped": "📂 {{count}} 個の画像を追加し、画像以外の {{skipped}} 個を除外しました",
+    "readFolderFailed": "❌ フォルダの読み込みに失敗しました: {{message}}",
+    "noTable": "❌ Base を取得できません。プラグインを再読み込みしてください",
+    "selectFields": "⚠️ 照合フィールドと画像フィールドを選択してください",
+    "selectParent": "⚠️ 画像サブフォルダを含む親フォルダを選択してください",
+    "enterApiKey": "⚠️ Firefly API Key を入力してください",
+    "loadingRecords": "🚀 レコードを読み込んでいます...",
+    "recordsLoaded": "✅ {{records}} 件のレコードと {{keys}} 個の照合キーを読み込みました",
+    "noSubfolders": "⚠️ サブフォルダが見つかりません。親フォルダを選択してください",
+    "subfoldersDebug": "📂 サブフォルダ ({{count}}): {{values}}",
+    "matchKeysDebug": "🔑 照合キー ({{count}}): {{values}}",
+    "noMatch": "⚠️ 一致するレコードがないためスキップしました (キー: {{key}}, len={{length}})",
+    "noImagesInFolder": "⚠️ {{folder}} に対応画像がないためスキップしました",
+    "noCandidates": "⚠️ アップロード可能なレコードがないため Firefly クレジットは消費されません",
+    "billingStart": "💳 Firefly 決済: {{records}} 件を {{price}} クレジットで更新します...",
+    "billingIdempotent": "✅ 重複課金なしで実行を確認しました。残高: {{balance}}",
+    "billingSuccess": "✅ {{charged}} Firefly クレジットを消費しました。残高: {{balance}}",
+    "processingFolder": "📂 処理中のサブフォルダ: {{folder}}",
+    "overLimit": "⚠️ {{count}} 枚の画像があるため、最初の {{limit}} 枚のみ使用します",
+    "uploadOrder": "🧮 アップロード順 ({{count}}): {{files}}",
+    "recordUpdated": "✅ レコード {{recordId}} に {{count}} 枚の画像を追加しました",
+    "uploadFailed": "❌ アップロードに失敗しました: {{message}}",
+    "complete": "🎉 完了: 成功 {{success}}、失敗 {{failed}}、スキップ {{skipped}}",
+    "runFailed": "❌ 実行に失敗しました: {{message}}"
+  },
+  "billing": {
+    "networkReason": "ネットワークエラー",
+    "connectionError": "Firefly 決済 ({{endpoint}}) に接続できません: {{reason}}。サービスまたは CORS 設定を確認してください。",
+    "balancePending": "確認中",
+    "balance": "{{value}} クレジット",
+    "errors": {
+      "AUTHORIZATION_ERROR": "Firefly API Key が無効または停止されています",
+      "INSUFFICIENT_CREDITS": "Firefly クレジットが不足しています",
+      "UNKNOWN_PRODUCT": "画像一括アップロードの決済が有効ではありません",
+      "PRODUCT_PRICE_MISMATCH": "Firefly クレジット価格の設定が正しくありません",
+      "BAD_REQUEST": "Firefly 決済リクエストが正しくありません",
+      "HTTP_400": "Firefly 決済でエラーが返されました",
+      "HTTP_404": "Firefly 決済エンドポイントが展開されていません",
+      "INTERNAL_ERROR": "Firefly 決済は一時的に利用できません",
+      "NETWORK_ERROR": "Firefly 決済に接続できません",
+      "fallback": "Firefly 決済に失敗しました"
+    }
+  }
+}

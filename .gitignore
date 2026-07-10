@@ -1,8 +1,7 @@
 # Dependencies
 node_modules/
 
-# Build output
-dist/
+# Build metadata
 *.tsbuildinfo
 
 # macOS system files
@@ -25,3 +24,7 @@ npm-debug.log*
 # Temporary files
 *.tmp
 .cache/
+tmp/
+prototypes/
+release/**/*.zip
+release/**/*.sha256
